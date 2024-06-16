@@ -11,6 +11,11 @@ export default function Navbar() {
           </Link>
         </li>
         <li>
+          <Link href="/product" className="cursor-pointer">
+            Product
+          </Link>
+        </li>
+        <li>
           <Link href="/about" className="cursor-pointer">
             About
           </Link>
@@ -18,6 +23,16 @@ export default function Navbar() {
         <li>
           <Link href="/about/profile" className="cursor-pointer">
             Profile
+          </Link>
+        </li>
+        <li>
+          <Link href="/login" className="cursor-pointer">
+            Login
+          </Link>
+        </li>
+        <li>
+          <Link href="/register" className="cursor-pointer">
+            Register
           </Link>
         </li>
       </ul>
