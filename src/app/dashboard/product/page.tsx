@@ -1,21 +1,8 @@
+import { GetDashboardProduct } from "@/services/products";
 import Image from "next/image";
 
-export async function GetProduct() {
-  const res = await fetch("http://localhost:3000/api", {
-    next: {
-      // revalidate: 10,
-      tags: ["dashboard-product"],
-    },
-  });
-
-  if (!res.ok) throw new Error("Failed to fetch product");
-
-  const { data } = await res.json();
-  return data;
-}
-
 export default async function DashboardProduct() {
-  const datas = await GetProduct();
+  const { data: datas } = await GetDashboardProduct("/api");
 
   return (
     <div className="max-w-6xl mx-auto p-6">
