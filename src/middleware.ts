@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
 export function middleware(request: NextRequest) {
-  const isAdmin = false;
+  const isAdmin = true;
 
   if (request.nextUrl.pathname.startsWith("/home")) {
     return NextResponse.redirect(new URL("/", request.url));
