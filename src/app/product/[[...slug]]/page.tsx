@@ -1,4 +1,5 @@
-import Link from "next/link";
+import ProductCard from "../_components/ProductCard";
+import ProductDetail from "../_components/ProductDetail";
 
 export async function GetProducts(id: string) {
   const url = id
@@ -22,26 +23,15 @@ export default async function DetailProductPage({
   const datas = await GetProducts(params.slug && params.slug[0]);
 
   return (
-    <div className="py-12">
+    <div className="py-12 p-4 max-w-6xl mx-auto">
       {!params.slug ? (
-        <>
-          <div className="grid md:grid-cols-3 lg:grid-cols-4 justify-items-center gap-3">
-            {datas.data.map((product: any) => (
-              <Link
-                href={`/product/${product.id}`}
-                key={product.id}
-                className="w-60 h-60 bg-slate-300 rounded-md">
-                {product.title}
-              </Link>
-            ))}
-          </div>
-        </>
+        <div className="grid md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 justify-items-center gap-3">
+          {datas.data.map((product: any) => (
+            <ProductCard product={product} key={product.id} />
+          ))}
+        </div>
       ) : (
-        <>
-          <h1>Detail Product Page</h1>
-          <h2>{datas.data.title}</h2>
-          <p>{datas.data.description}</p>
-        </>
+        <ProductDetail product={datas.data} />
       )}
     </div>
   );
