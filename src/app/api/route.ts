@@ -1,3 +1,4 @@
+import { retrieveAllData } from "@/lib/firebase/service";
 import { NextResponse } from "next/server";
 
 const datas = [
@@ -25,9 +26,12 @@ const datas = [
 ];
 
 export async function GET() {
+  const products = await retrieveAllData("products");
+
   return NextResponse.json({
     status: 200,
     message: "success",
     data: datas,
+    products,
   });
 }
