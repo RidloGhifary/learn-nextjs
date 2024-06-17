@@ -11,10 +11,12 @@ type ProductCardProps = {
     description: string;
     thumbnail: string;
   };
-  key: number;
 };
 
-export default function ProductCard({ product, key }: ProductCardProps) {
+export default function ProductCard(
+  { product }: ProductCardProps,
+  key: number
+) {
   return (
     <div
       key={key}

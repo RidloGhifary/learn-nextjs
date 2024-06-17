@@ -7,8 +7,8 @@ export async function GetProducts(id: string) {
     : "http://localhost:3000/api/products";
 
   const res = await fetch(url, {
-    cache: "no-store",
-    next: { revalidate: 3600 },
+    // cache: "no-store",
+    // next: { revalidate: 3600 },
   });
 
   const data = await res.json();
