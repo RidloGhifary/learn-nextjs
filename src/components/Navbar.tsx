@@ -14,7 +14,7 @@ export default function Navbar() {
           <Link href="/">NextJS</Link>
         </h1>
         <ul className="flex justify-center items-center gap-5">
-          {["product", "about", "about/profile"].map((str, i) => (
+          {["product", "about", "about/profile", "dashboard"].map((str, i) => (
             <li key={i}>
               <Link
                 href={`/${str}`}

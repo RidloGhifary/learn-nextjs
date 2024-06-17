@@ -16,17 +16,19 @@ type ProductCardProps = {
 
 export default function ProductCard({ product, key }: ProductCardProps) {
   return (
-    <Link
+    <div
       key={key}
-      href={`/product/${product.id}`}
       className="text-black w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow bg-black/5">
-      <Image
-        className="aspect-auto p-2 rounded-t-lg object-contain w-full h-auto"
-        src={product.thumbnail}
-        alt={product.title}
-        width={500}
-        height={500}
-      />
+      <Link href={`/product/${product.id}`}>
+        <Image
+          className="aspect-auto p-2 rounded-t-lg object-contain w-full h-auto"
+          src={product.thumbnail}
+          alt={product.title}
+          width={500}
+          height={500}
+          priority
+        />
+      </Link>
       <div className="px-5 pb-5">
         <Link href="#">
           <h5 className="text-xl font-semibold tracking-tight truncate">
@@ -57,6 +59,6 @@ export default function ProductCard({ product, key }: ProductCardProps) {
           </span>
         </div>
       </div>
-    </Link>
+    </div>
   );
 }
