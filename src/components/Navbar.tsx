@@ -1,11 +1,12 @@
 "use client";
 
+import { signIn, signOut, useSession } from "next-auth/react";
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 
 export default function Navbar() {
+  const { status } = useSession();
   const pathname = usePathname();
-  const router = useRouter();
 
   return (
     <nav className="flex max-w-6xl mx-auto px-5 py-3 justify-between items-center">
@@ -28,11 +29,19 @@ export default function Navbar() {
         </ul>
       </>
       <div>
-        <button
-          onClick={() => router.push("/login")}
-          className="cursor-pointer bg-black rounded-xl p-2 px-5 text-white hover:bg-black/80">
-          Login
-        </button>
+        {status === "authenticated" ? (
+          <button
+            onClick={() => signOut()}
+            className="cursor-pointer bg-black rounded-xl p-2 px-5 text-white hover:bg-black/80">
+            Log out
+          </button>
+        ) : (
+          <button
+            onClick={() => signIn()}
+            className="cursor-pointer bg-black rounded-xl p-2 px-5 text-white hover:bg-black/80">
+            Login
+          </button>
+        )}
       </div>
     </nav>
   );

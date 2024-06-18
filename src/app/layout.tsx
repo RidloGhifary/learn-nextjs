@@ -4,6 +4,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import { usePathname } from "next/navigation";
+import { SessionProvider } from "next-auth/react";
 // import type { Metadata } from "next";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -25,8 +26,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        {DisabledNavbar.includes(pathname) ? null : <Navbar />}
-        {children}
+        <SessionProvider>
+          {DisabledNavbar.includes(pathname) ? null : <Navbar />}
+          {children}
+        </SessionProvider>
       </body>
     </html>
   );
