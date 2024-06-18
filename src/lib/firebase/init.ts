@@ -1,8 +1,8 @@
 import { initializeApp } from "firebase/app";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDjolsPKAHFZVNCBdrPoIR0iXD7xFY8i3w",
-  authDomain: "belajar-next-js-41323.firebaseapp.com",
+  apiKey: process.env.FIREBASE_API_KEY,
+  authDomain: process.env.FIREBASE_AUTH_DOMAIN,
   projectId: "belajar-next-js-41323",
   storageBucket: "belajar-next-js-41323.appspot.com",
   messagingSenderId: "2554155300",
