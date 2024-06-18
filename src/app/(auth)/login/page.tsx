@@ -5,11 +5,13 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
-export default function LoginPage() {
+export default function LoginPage({ searchParams }: any) {
   const [error, setError] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
+
   const router = useRouter();
 
+  const callbackUrl = searchParams.callbackUrl || "/";
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsLoading(true);
@@ -19,12 +21,11 @@ export default function LoginPage() {
       redirect: false,
       email: e.currentTarget.email.value,
       password: e.currentTarget.password.value,
-      callbackUrl: "/",
+      callbackUrl,
     });
 
     if (res?.ok) {
-      e.currentTarget.reset();
-      router.push("/");
+      router.push(callbackUrl);
       setIsLoading(false);
     } else {
       setError("Something went wrong, please try again later");
@@ -94,7 +95,7 @@ export default function LoginPage() {
               disabled={isLoading}
               type="submit"
               className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
-              Sign in
+              {isLoading ? "Loading..." : "Sign in"}
             </button>
           </div>
         </form>
