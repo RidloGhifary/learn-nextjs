@@ -3,27 +3,32 @@
 import { signIn } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 export default function LoginPage() {
+  const [error, setError] = useState<string>("");
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setIsLoading(true);
 
     // TODO: do login
-    try {
-      const res = await signIn("credentials", {
-        redirect: false,
-        email: e.currentTarget.email.value,
-        password: e.currentTarget.password.value,
-        callbackUrl: "/",
-      });
+    const res = await signIn("credentials", {
+      redirect: false,
+      email: e.currentTarget.email.value,
+      password: e.currentTarget.password.value,
+      callbackUrl: "/",
+    });
 
-      if (res?.ok) {
-        router.push("/");
-      }
-    } catch (err) {
-      console.error(err);
+    if (res?.ok) {
+      e.currentTarget.reset();
+      router.push("/");
+      setIsLoading(false);
+    } else {
+      setError("Something went wrong, please try again later");
+      setIsLoading(false);
     }
   };
 
@@ -45,6 +50,7 @@ export default function LoginPage() {
             </label>
             <div className="mt-2">
               <input
+                disabled={isLoading}
                 id="email"
                 name="email"
                 type="email"
@@ -72,6 +78,7 @@ export default function LoginPage() {
             </div>
             <div className="mt-2">
               <input
+                disabled={isLoading}
                 id="password"
                 name="password"
                 type="password"
@@ -84,12 +91,17 @@ export default function LoginPage() {
 
           <div>
             <button
+              disabled={isLoading}
               type="submit"
               className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
               Sign in
             </button>
           </div>
         </form>
+
+        {error && (
+          <p className="mt-10 text-center text-base text-rose-500">{error}</p>
+        )}
 
         <p className="mt-10 text-center text-sm text-gray-500">
           Not a member?{" "}

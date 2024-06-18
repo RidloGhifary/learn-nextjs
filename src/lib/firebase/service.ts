@@ -64,3 +64,19 @@ export async function register(data: {
     }
   }
 }
+
+export async function login(email: string) {
+  const q = query(
+    collection(firestore, "nextjs-users"),
+    where("email", "==", email)
+  );
+
+  const snapshot = await getDocs(q);
+  const users = snapshot.docs.map((doc) => ({
+    ...doc.data(),
+    id: doc.id,
+  }));
+
+  if (users) return users[0];
+  else return null;
+}
