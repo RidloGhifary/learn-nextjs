@@ -100,6 +100,15 @@ export default function LoginPage({ searchParams }: any) {
           </div>
         </form>
 
+        <hr />
+
+        <button
+          type="button"
+          onClick={() => signIn("google", { callbackUrl, redirect: false })}
+          className="mt-6 flex w-full justify-center rounded-md bg-black px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-md hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black/30">
+          Login with google
+        </button>
+
         {error && (
           <p className="mt-10 text-center text-base text-rose-500">{error}</p>
         )}

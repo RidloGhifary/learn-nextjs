@@ -7,6 +7,7 @@ import {
   query,
   where,
   addDoc,
+  updateDoc,
 } from "firebase/firestore";
 import app from "./init";
 import bcrypt from "bcryptjs";
@@ -79,4 +80,32 @@ export async function login(email: string) {
 
   if (users) return users[0];
   else return null;
+}
+
+export async function loginWithGoogle(data: any, callback: any) {
+  const q = query(
+    collection(firestore, "nextjs-users"),
+    where("email", "==", data.email)
+  );
+
+  const snapshot = await getDocs(q);
+  const users: any = snapshot.docs.map((doc) => ({
+    ...doc.data(),
+    id: doc.id,
+  }));
+
+  if (users.length > 0) {
+    data.role = users[0].role;
+    data.updatedAt = new Date().toISOString();
+    await updateDoc(doc(firestore, "nextjs-users", users[0].id), data).then(
+      () => {
+        callback({ status: true, data });
+      }
+    );
+  } else {
+    data.role = "member";
+    await addDoc(collection(firestore, "nextjs-users"), data).then(() => {
+      callback({ status: true, data });
+    });
+  }
 }
