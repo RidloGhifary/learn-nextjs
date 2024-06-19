@@ -28,8 +28,8 @@ export default function ProductDetail({ product }: ProductDetailProps) {
   return (
     <div className="grid md:grid-cols-2 gap-3">
       <Image
-        src={product.images[0]}
-        alt={product.title}
+        src={product?.images[0]}
+        alt={product?.title}
         width={500}
         height={500}
         priority
@@ -37,20 +37,22 @@ export default function ProductDetail({ product }: ProductDetailProps) {
       />
       <div className="p-2 space-y-4">
         <h2 className="text-2xl md:text-4xl xl:text-6xl font-bold">
-          {product.title}
+          {product?.title}
         </h2>
         <h4 className="text-xl font-semibold bg-black/5 border border-black/10 p-3 rounded-lg w-fit">
-          {product.brand} -{" "}
-          {product.tags.map((x: string, i: number) => (
-            <span key={i}>{x + (i < product.tags.length - 1 ? ", " : "")}</span>
+          {product?.brand} -{" "}
+          {product?.tags?.map((x: string, i: number) => (
+            <span key={i}>
+              {x + (i < product?.tags?.length - 1 ? ", " : "")}
+            </span>
           ))}
         </h4>
-        <p className="text-gray-700">{product.description}</p>
+        <p className="text-gray-700">{product?.description}</p>
         <hr />
         <div className="space-y-4">
-          {product.reviews.map((review: any, i: number) => (
+          {product?.reviews.map((review: any, i: number) => (
             <div key={i} className="space-y-2">
-              <h3 className="font-bold text-2xl">{review.reviewerName}</h3>
+              <h3 className="font-bold text-2xl">{review?.reviewerName}</h3>
               <p>{review.date}</p>
               <p className="flex items-center space-x-1 rtl:space-x-reverse">
                 {Array.from({ length: 5 }, (_, i) => i + 1).map(
@@ -59,7 +61,7 @@ export default function ProductDetail({ product }: ProductDetailProps) {
                   )
                 )}
               </p>
-              <p>{review.comment}</p>
+              <p>{review?.comment}</p>
               <hr />
             </div>
           ))}

@@ -2,9 +2,10 @@
 
 import { Poppins } from "next/font/google";
 import "./globals.css";
-import Navbar from "@/components/Navbar";
+
 import { usePathname } from "next/navigation";
 import { SessionProvider } from "next-auth/react";
+import Navbar from "@/components/Navbar";
 // import type { Metadata } from "next";
 
 const poppins = Poppins({
