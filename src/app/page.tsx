@@ -6,7 +6,6 @@ export const metadata: Metadata = {
   authors: [
     { name: "Ridlo achmad ghifary", url: "https://github.com/RidloGhifary" },
   ],
-  themeColor: "#8b5cf6",
   openGraph: {
     title: "Home | NextJS",
     description: "Build for learning nextjs deeply",
