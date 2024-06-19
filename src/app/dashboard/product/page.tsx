@@ -16,6 +16,7 @@ export default async function DashboardProduct() {
               alt={product.title}
               width={200}
               height={200}
+              loading="lazy"
               className="aspect-auto object-contain w-full h-auto"
             />
             <h2 className="truncate p-4">{product.title}</h2>

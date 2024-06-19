@@ -1,6 +1,10 @@
-import Modal from "@/components/Modal";
 import { GetSingleProduct } from "@/services/products";
+import dynamic from "next/dynamic";
 import Image from "next/image";
+
+const Modal = dynamic(() => import("@/components/Modal"), {
+  loading: () => <p>Loading...</p>,
+});
 
 export default async function ModalPreview({
   params,

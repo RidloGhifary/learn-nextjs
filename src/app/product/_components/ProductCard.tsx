@@ -29,7 +29,7 @@ export default function ProductCard(
           alt={product.title}
           width={500}
           height={500}
-          priority
+          loading="lazy"
         />
       </Link>
       <div className="px-5 pb-5">

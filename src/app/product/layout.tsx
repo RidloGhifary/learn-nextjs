@@ -1,3 +1,10 @@
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Product",
+  description: "This is product page",
+};
+
 export default function ProductLayout({
   children,
   modal,

@@ -1,13 +1,16 @@
 "use client";
 
-import { Inter } from "next/font/google";
+import { Poppins } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import { usePathname } from "next/navigation";
 import { SessionProvider } from "next-auth/react";
 // import type { Metadata } from "next";
 
-const inter = Inter({ subsets: ["latin"] });
+const poppins = Poppins({
+  subsets: ["latin"],
+  weight: ["200", "400", "600", "800"],
+});
 
 // export const metadata: Metadata = {
 //   title: "NextJS",
@@ -25,7 +28,7 @@ export default function RootLayout({
 
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={poppins.className}>
         <SessionProvider>
           {DisabledNavbar.includes(pathname) ? null : <Navbar />}
           {children}
