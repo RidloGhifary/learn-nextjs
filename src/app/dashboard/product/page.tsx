@@ -1,8 +1,14 @@
+"use client";
+
+import { fetcher } from "@/lib/swr/fetcher";
 import { GetDashboardProduct } from "@/services/products";
 import Image from "next/image";
+import useSWR from "swr";
 
-export default async function DashboardProduct() {
-  const { data: datas } = await GetDashboardProduct("/api");
+export default function DashboardProduct() {
+  const { data: datas, isLoading } = useSWR("/api", fetcher);
+
+  if (isLoading) return <p className="text-center">Loading...</p>;
 
   return (
     <div className="max-w-6xl mx-auto p-6">
